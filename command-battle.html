@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プロトタイプ：魂の診断者</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="game-container">
+
+        <!-- フェーズ1：導入と最初の行動ログ取得 -->
+        <div id="phase-1" class="phase active">
+            <div id="goddess-message-area-1" class="goddess-message">
+                <!-- 女神のセリフがここに表示される -->
+            </div>
+            <div id="action-button-area">
+                <button id="glowing-button" class="action-button" style="display: none;">光に触れる</button>
+            </div>
+        </div>
+
+        <!-- フェーズ2：簡単な選択と追加ログ取得 -->
+        <div id="phase-2" class="phase">
+            <div id="goddess-message-area-2" class="goddess-message">
+                <!-- 女神のセリフがここに表示される -->
+            </div>
+            <div id="choices-area">
+                <!-- 選択肢ボタンがここに表示される -->
+                <!-- 例: <button class="choice-button" data-choice="1">迷わず進む</button> -->
+            </div>
+        </div>
+
+        <!-- フェーズ3：職業決定、ステータス表示、女神のコメント -->
+        <div id="phase-3" class="phase">
+            <div id="goddess-message-area-3" class="goddess-message">
+                <!-- 女神のセリフ（職業決定など）がここに表示される -->
+            </div>
+            <div id="status-display-area">
+                <h2 id="player-job">職業：？？？</h2>
+                <p>HP：<span id="player-hp">---</span></p>
+                <p>攻撃力：<span id="player-attack">---</span></p>
+                <p>防御力：<span id="player-defense">---</span></p>
+                <p>素早さ：<span id="player-speed">---</span></p>
+            </div>
+            <button id="to-battle-button" class="action-button">ドラゴンの洞窟へ</button>
+        </div>
+
+        <!-- フェーズ4：戦闘 -->
+        <div id="phase-4" class="phase">
+            <div id="battle-info-area">
+                <div id="player-battle-status">
+                    <h3>あなた</h3>
+                    <p>職業：<span id="battle-player-job">---</span></p>
+                    <p>HP：<span id="battle-player-hp">---</span> / <span id="battle-player-max-hp">---</span></p>
+                </div>
+                <div id="enemy-battle-status">
+                    <h3>敵：<span id="enemy-name">ゴブリン</span></h3>
+                    <p>HP：<span id="battle-enemy-hp">---</span> / <span id="battle-enemy-max-hp">---</span></p>
+                </div>
+            </div>
+            <div id="battle-log-area">
+                <!-- 戦闘ログがここに表示される -->
+            </div>
+            <div id="command-area">
+                <button id="attack-command" class="battle-command">攻撃</button>
+                <button id="defense-command" class="battle-command">防御</button>
+            </div>
+        </div>
+
+        <!-- フェーズ5：結果と次のステップへの示唆 -->
+        <div id="phase-5" class="phase">
+            <div id="result-message-area" class="goddess-message">
+                <!-- 戦闘結果と女神のセリフがここに表示される -->
+            </div>
+            <div id="restart-options-area">
+                <button id="retry-battle-button" class="action-button">もう一度この魂で挑む</button>
+                <button id="reincarnate-button" class="action-button">新たな魂で転生する</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script> <!-- JavaScriptファイルへのリンク（後で作成） -->
+</body>
+</html>

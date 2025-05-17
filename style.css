@@ -1,0 +1,206 @@
+body {
+    font-family: 'Noto Serif JP', serif; /* Noto Serif JP を適用 */
+    display: flex;
+    flex-direction: column; /* 要素を縦に並べるため */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #e8eaf6; /* 淡いラベンダー系の背景 */
+    color: #333; /* 基本文字色 */
+    line-height: 1.8; /* 行間を少し広めに */
+}
+
+#game-container {
+    width: 90%;
+    max-width: 700px;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.9); /* 少し透明感のある白 */
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    text-align: center;
+    display: flex;
+    flex-direction: column; /* コンテナ内の要素も縦並び */
+    align-items: center; /* 中央揃え */
+}
+
+/* フェーズの表示/非表示制御 */
+.phase {
+    display: none;
+    width: 100%; /* 親要素いっぱいに広がる */
+    padding: 20px;
+    /* border: 1px solid #c5cae9; /* 枠線を少しテーマカラーに合わせる */
+    border-radius: 10px;
+    margin-top: 20px;
+    animation: fadeIn 0.5s ease-in-out; /* フェードインアニメーション */
+}
+.phase.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.goddess-message {
+    margin-bottom: 25px;
+    min-height: 100px; /* セリフエリアの高さ */
+    padding: 20px;
+    background-color: rgba(204, 208, 230, 0.7); /* 淡い青紫系の背景、少し透明 */
+    border-radius: 8px;
+    text-align: center; /* ★セリフを中央揃えに変更 */
+    font-size: 1.1em; /* 少し大きめに */
+    display: flex; /* ★Flexboxで中央揃えを実現 */
+    justify-content: center; /* ★水平方向中央 */
+    align-items: center; /* ★垂直方向中央 */
+    flex-direction: column; /* ★複数行の場合も中央に */
+    white-space: pre-wrap; /* 改行をそのまま表示 */
+    transition: background-color 0.3s; /* ホバー時の背景色変化を滑らかに */
+}
+.goddess-message:hover {
+    background-color: rgba(190, 195, 220, 0.8);
+}
+
+
+.action-button,
+.choice-button,
+.battle-command {
+    display: inline-block;
+    padding: 12px 25px;
+    margin: 8px;
+    border: none;
+    border-radius: 25px; /* 角をより丸く */
+    background-image: linear-gradient(to right, #8e99f3, #5c6bc0); /* 青紫系グラデーション */
+    color: white;
+    cursor: pointer;
+    font-size: 1em; /* フォントサイズ調整 */
+    font-weight: bold; /* 太字に */
+    letter-spacing: 0.5px; /* 字間調整 */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.action-button:hover,
+.choice-button:hover,
+.battle-command:hover {
+    background-image: linear-gradient(to right, #7986cb, #3f51b5);
+    transform: translateY(-2px); /* 少し浮き上がる効果 */
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+.action-button:active, /* クリック時 */
+.choice-button:active,
+.battle-command:active {
+    transform: translateY(0px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+
+#glowing-button {
+    background-image: linear-gradient(to right, #fff176, #ffd54f); /* ゴールド系グラデーション */
+    color: #424242; /* 暗めの文字色 */
+    animation: pulse 2s infinite; /* ★脈打つアニメーション追加 */
+}
+#glowing-button:hover {
+    background-image: linear-gradient(to right, #ffeb3b, #ffc107);
+}
+
+@keyframes pulse { /* ★光るボタンの脈打つアニメーション */
+    0% { transform: scale(1); box-shadow: 0 4px 10px rgba(255,200,0,0.2); }
+    50% { transform: scale(1.05); box-shadow: 0 6px 20px rgba(255,200,0,0.4); }
+    100% { transform: scale(1); box-shadow: 0 4px 10px rgba(255,200,0,0.2); }
+}
+
+
+#status-display-area {
+    margin-top: 25px;
+    padding: 20px;
+    background-color: rgba(245, 245, 245, 0.8); /* 少し透明感のある白 */
+    border-radius: 8px;
+    border: 1px solid #d1c4e9; /* 淡い紫の枠線 */
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+}
+#status-display-area h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #5e35b1; /* 深い紫色 */
+    font-weight: bold;
+    border-bottom: 2px solid #b39ddb; /* 紫系のアンダーライン */
+    padding-bottom: 5px;
+}
+#status-display-area p {
+    margin: 8px 0;
+    font-size: 1.1em;
+    color: #4527a0; /* やや濃い紫色 */
+}
+#status-display-area span {
+    font-weight: bold;
+    color: #311b92; /* 最も濃い紫色 */
+    margin-left: 5px;
+}
+
+
+#battle-info-area {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+#player-battle-status,
+#enemy-battle-status {
+    width: 45%;
+    padding: 15px;
+    border: 1px solid #b39ddb;
+    border-radius: 8px;
+    background-color: rgba(255,255,255,0.7);
+}
+#player-battle-status h3,
+#enemy-battle-status h3 {
+    margin-top: 0;
+    color: #512da8;
+    border-bottom: 1px solid #d1c4e9;
+    padding-bottom: 5px;
+}
+
+#battle-log-area {
+    min-height: 80px;
+    max-height: 150px; /* 高すぎないように制限 */
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: rgba(222, 224, 240, 0.7); /* ログエリアも少しテーマに合わせる */
+    border: 1px solid #c5cae9;
+    border-radius: 8px;
+    text-align: left;
+    overflow-y: auto;
+    font-size: 0.95em;
+}
+#battle-log-area br { /* ログの改行を見やすく */
+    content: "";
+    margin: 0.3em 0;
+    display: block;
+}
+
+#command-area {
+    margin-top: 20px;
+}
+
+#restart-options-area button {
+    margin-top: 15px;
+    background-image: linear-gradient(to right, #7e57c2, #5e35b1); /* 再挑戦ボタンの色も調整 */
+}
+#restart-options-area button:hover {
+    background-image: linear-gradient(to right, #673ab7, #4527a0);
+}
+
+/* メッセージが一文だけ表示される時のためのスタイル */
+.single-sentence {
+    font-size: 1.3em; /* 少し大きくして強調 */
+    font-weight: bold;
+    color: #311b92; /* 濃い色で */
+    text-align: center;
+    padding: 30px 10px; /* 上下にもしっかり余白 */
+    animation: textPopIn 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* ポップインアニメーション */
+}
+
+@keyframes textPopIn {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
